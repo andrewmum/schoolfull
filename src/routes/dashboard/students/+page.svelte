@@ -12,6 +12,8 @@
     let loading = false;
     let isAvailable = false;
     let uuid  = crypto.randomUUID();
+    let userName = "";
+    let password = "";
 
     async function createStudent() {
       const batch = writeBatch(db);
@@ -35,50 +37,11 @@
 
 
 <AuthCheck>
-  <!-- <form class="w-2/5 text-zinc-950" on:submit|preventDefault={createStudent}>
-      <div class="join">
-        <div>
-          <div>
-            <input class="input input-bordered join-item" type="text" bind:value={firstName}/>
-          </div>
-        </div>
-        <div class="indicator">
-          <span class="btn join-item" aria-disabled="true">First Name</span>
-        </div>
-      </div>
-
-      <div class="join">
-        <div>
-          <div>
-            <input class="input input-bordered join-item" type="text" bind:value={lastName}/>
-          </div>
-        </div>
-        <div class="indicator">
-          <span class="btn join-item" aria-disabled="true">Last Name</span>
-        </div>
-      </div>
-
-      <div class="join">
-        <div>
-          <div>
-            <input class="input input-bordered join-item" type="number" bind:value={bank}/>
-          </div>
-        </div>
-        <div class="indicator">
-          <span class="btn join-item" aria-disabled="true">Bank</span>
-        </div>
-      </div>
-
-      <div class="my-4 min-h-16 px-8 w-full">
-
-          <span class="btn btn-outline btn-info">Add Student @{firstName} </span>
-      </div>
-    </form> -->
       <form class="w-full max-w-sm text-black" on:submit|preventDefault={createStudent}>
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
             <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
-              Full Name
+              First Name
             </label>
           </div>
           <div class="md:w-2/3">
@@ -98,6 +61,16 @@
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
             <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+              Password
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input class="input input-bordered join-item" type="text" bind:value={password}/>
+          </div>
+        </div>
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
               Bank
             </label>
           </div>
@@ -109,7 +82,7 @@
           <div class="md:w-1/3"></div>
           <div class="md:w-2/3">
             <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
-              Add Student  @{firstName}
+              Add student  @{ firstName.length && lastName.length ? firstName[0] + lastName.substring(0,4) : '' }
             </button>
           </div>
         </div>

@@ -5,6 +5,8 @@
     import { collection, doc, updateDoc } from 'firebase/firestore';
     import { fade } from 'svelte/transition';
 
+    import StudentModal from "$lib/components/StudentModalForm.svelte"
+    import StudentModalForm from '$lib/components/StudentModalForm.svelte';
     export let data: PageData;
 
     let readyForChange = false;
@@ -20,6 +22,9 @@
             focused = "";
             debugger;
         }
+    }
+    function showStudentDetail(element:any){
+        element.showModal();
     }
 </script>
 
@@ -52,14 +57,13 @@
                     {#if success == student.id}
                         <button transition:fade class="btn btn-success">Success</button>
                     {/if}
-                    <a href="/dashboard/student-detail/{student.id}"  >Student Detail</a>
+                    <button class="btn" on:click={()=>showStudentDetail(document.getElementById('my_modal_2_' + student.id))}>Student Detail</button>
+                    <StudentModalForm student={student} />
                 </div>
 
             </div>
         {/each}
     </div>
-    <ul class="list-none">
 
-    </ul>
 </AuthCheck>
   </main>
